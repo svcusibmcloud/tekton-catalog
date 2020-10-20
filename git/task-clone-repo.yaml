@@ -238,20 +238,20 @@ spec:
           echo "Fetching specific -${REVISION}- commit"
           if [ -z "$BRANCH" ]; then
             # No branch provided
-            _clone_command='git clone -q -n $GIT_URL $DIRECTORY_NAME'
+            _clone_command='git clone --recurse-submodules -q -n $GIT_URL $DIRECTORY_NAME'
           elif git ls-remote --heads --exit-code $GIT_URL $BRANCH > /dev/null 2>&1; then
-            _clone_command='git clone -q -b "$BRANCH" $GIT_URL $DIRECTORY_NAME'
+            _clone_command='git clone --recurse-submodules -q -b "$BRANCH" $GIT_URL $DIRECTORY_NAME'
           else
             echo "branch $BRANCH does not exists in $REPOSITORY"
-            _clone_command='git clone -q -n $GIT_URL $DIRECTORY_NAME'
+            _clone_command='git clone --recurse-submodules -q -n $GIT_URL $DIRECTORY_NAME'
           fi
         else
           if [ -z "$BRANCH" ]; then
             # No branch provided
             echo "No branch or revision provided."
-            _clone_command='git clone -q -n $GIT_URL $DIRECTORY_NAME'
+            _clone_command='git clone --recurse-submodules -q -n $GIT_URL $DIRECTORY_NAME'
           else
-            _clone_command='git clone -q -b "$BRANCH" $GIT_URL $DIRECTORY_NAME'
+            _clone_command='git clone --recurse-submodules -q -b "$BRANCH" $GIT_URL $DIRECTORY_NAME'
           fi
         fi
         _max_retry=$(params.git-max-retry)
